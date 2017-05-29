@@ -10,6 +10,27 @@
     - monero
     - build
 
+- name: create monero group
+  group:
+    name: "{{ monero_group }}"
+    state: present
+  tags:
+    - monero
+    - build
+    - setup
+
+- name: create monero user
+  user:
+    name: "{{ monero_monerod_user }}"
+    group: "{{ monero_monerod_group }}"
+    system: true
+    shell: /usr/sbin/nologin
+    state: present
+  tags:
+    - monero
+    - build
+    - setup
+
 - name: create installation directory
   file:
     path: "{{ monero_install_dir }}"
@@ -22,16 +43,38 @@
     - build
     - install
 
-- name: create build src directory
+- name: create nix dir structure
   file:
-    path: "{{ monero_install_dir }}/src"
+    path: "{{ monero_install_dir }}{{ item }}"
     owner: root
     group: root
     mode: 0775
     state: directory
+  with_items:
+    - /src
+    - /bin
+    - /etc
+    - /var
+    - /var/lib
   tags:
     - monero
     - build
+    - install
+
+- name: create monero data dirs
+  file:
+    path: "{{ monero_install_dir }}{{ item }}"
+    owner: "{{ monero_user }}"
+    group: "{{ monero_group }}"
+    mode: 0775
+    state: directory
+  with_items:
+    - /var/lib/monero
+    - /var/log
+  tags:
+   - monero
+   - build
+   - install
 
 - name: download monero source code
   git:

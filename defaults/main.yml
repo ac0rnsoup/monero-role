@@ -19,3 +19,6 @@ monero_source_deps:
 monero_install_dir: /opt/monero
 monero_git: https://github.com/monero-project/monero.git
 monero_version: v0.10.3.1
+
+monero_user: monero
+monero_group: monero

@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+{{ monero_install_dir }}/var/log/monerod.log {
+    {{ monero_monerod_logrotate_period }}
+    rotate {{ monero_monerod_logrotate_keep }}
+    compress
+    missingok
+    notifempty
+    sharedscripts
+    delaycompress
+    copytruncate
+}

@@ -22,3 +22,6 @@ monero_version: v0.10.3.1
 
 monero_user: monero
 monero_group: monero
+
+monero_monerod_logrotate_period: daily
+monero_monerod_logrotate_keep: 30

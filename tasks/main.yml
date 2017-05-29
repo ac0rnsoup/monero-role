@@ -94,4 +94,15 @@
   tags:
     - monero
     - build
- 
+
+- name: configure logrotate for httpd
+  template:
+    src: logrotate.j2
+    dest: /etc/logrotate.d/monero
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - monero
+    - logrotate
+    - config

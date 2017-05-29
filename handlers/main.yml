@@ -1,8 +1,13 @@
 ---
 # handlers file for monero-role
+
+#  this won't work unti ansible 2.4
+#- name: reload systemd
+#  systemd:
+#    daemon_reload: yes
+
 - name: reload systemd
-  systemd:
-    daemon_reload: yes
+  command: systemctl daemon-reload
 
 - name: restart monerod
   systemd:

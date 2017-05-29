@@ -15,4 +15,7 @@ monero_source_deps:
   - libexpat1-dev
   - doxygen
   - graphviz
-  
+
+monero_install_dir: /opt/monero
+monero_git: https://github.com/monero-project/monero.git
+monero_version: v0.10.3.1

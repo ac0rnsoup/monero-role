@@ -9,4 +9,37 @@
   tags:
     - monero
     - build
+
+- name: create installation directory
+  file:
+    path: "{{ monero_install_dir }}"
+    owner: root
+    group: root
+    mode: 0775
+    state: directory
+  tags:
+    - monero
+    - build
+    - install
+
+- name: create build src directory
+  file:
+    path: "{{ monero_install_dir }}/src"
+    owner: root
+    group: root
+    mode: 0775
+    state: directory
+  tags:
+    - monero
+    - build
+
+- name: download monero source code
+  git:
+    repo: "{{ monero_git }}"
+    version: "{{ monero_version }}"
+    dest: "{{ monero_install_dir/src/{{ monero_version }}"
+    update: no
+  tags:
+    - monero
+    - build
  

@@ -16,6 +16,14 @@ monero_source_deps:
   - doxygen
   - graphviz
 
+monero_binaries:
+  - monero-blockchain-export
+  - monero-blockchain-import
+  - monerod
+  - monero-utils-deserialize
+  - monero-wallet-cli
+  - monero-wallet-rpc
+
 monero_install_dir: /opt/monero
 monero_git: https://github.com/monero-project/monero.git
 monero_version: v0.10.3.1

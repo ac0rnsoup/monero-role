@@ -95,6 +95,12 @@
     - monero
     - build
 
+- name: install monero binaries
+  shell: "/bin/cp -p {{ monero_install_dir }}/src/{{ monero_version }}/build/release/bin/{{ item }} {{ monero_install_dir }}/bin/"
+  args:
+    creates: "{{ monero_install_dir }}/bin/{{ item }}"
+  with_items: "{{ monero_binaries }}"
+
 - name: configure logrotate for httpd
   template:
     src: logrotate.j2

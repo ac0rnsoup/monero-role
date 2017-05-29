@@ -39,6 +39,15 @@
     version: "{{ monero_version }}"
     dest: "{{ monero_install_dir }}/src/{{ monero_version }}"
     update: no
+  register: monero_code
+  tags:
+    - monero
+    - build
+
+- name: make monero
+  make:
+    chdir: "{{ monero_install_dir }}/src/{{ monero_version }}"
+  when: monero_code.changed
   tags:
     - monero
     - build

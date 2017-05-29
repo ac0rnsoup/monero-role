@@ -1,2 +1,12 @@
 ---
 # tasks file for monero-role
+
+- name: install deps to build monero from source
+  apt:
+    name: "{{ item }}"
+    state: present
+    with_items: "{{ monero_source_deps }}"
+  tags:
+    - monero
+    - build
+ 

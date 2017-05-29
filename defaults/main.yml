@@ -1,2 +1,18 @@
 ---
 # defaults file for monero-role
+monero_source_deps:
+  - build-essential
+  - cmake
+  - pkg-config
+  - libboost-all-dev
+  - libdb-dev
+  - libdb++-dev
+  - libevent-dev
+  - libunbound-dev
+  - libminiupnpc-dev
+  - libunwind8-dev
+  - libldns-dev
+  - libexpat1-dev
+  - doxygen
+  - graphviz
+  

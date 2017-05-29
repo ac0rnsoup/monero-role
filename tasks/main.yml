@@ -21,8 +21,8 @@
 
 - name: create monero user
   user:
-    name: "{{ monero_monerod_user }}"
-    group: "{{ monero_monerod_group }}"
+    name: "{{ monero_user }}"
+    group: "{{ monero_group }}"
     system: true
     shell: /usr/sbin/nologin
     state: present

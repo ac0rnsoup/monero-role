@@ -31,7 +31,7 @@ monero_version: v0.10.3.1
 monero_user: monero
 monero_group: monero
 
-monerod_loglevel: 0
+monerod_log_level: 0
 monerod_logrotate_period: daily
 monerod_logrotate_keep: 30
 

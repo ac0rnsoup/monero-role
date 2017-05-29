@@ -1,0 +1,18 @@
+# {{ ansible_managed }}
+[Unit]
+Description=Monero Full Node
+After=network.target
+
+[Service]
+User={{ monero_user }}
+Group={{ monero_group }}
+WorkingDirectory=~
+
+Type=forking
+ExecStart={{ monero_install_dir }}/bin/monerod --config-file {{ monero_install_dir }}/etc/monerod.conf --detach
+ExecStop={{ monero_install_dir }}/bin/monerod --config-file {{ monero_install_dir }}/etc/monerod.conf stop_daemon
+
+GuessMainPID=no
+
+[Install]
+WantedBy=multi-user.target

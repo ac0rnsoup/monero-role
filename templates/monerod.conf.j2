@@ -1,0 +1,23 @@
+# {{ ansible_managed }}
+
+data-dir={{ monero_install_dir }}/var/lib/monero
+log-file={{ monero_install_dir }}/var/log/monero.log
+log-level={{ monerod_log_level }}
+
+p2p-bind-ip={{ monerod_p2p_bind_ip }}
+p2p-bind-port={{ monerod_p2p_bind_port }}
+p2p-external-port={{ monerod_p2p_external_port }}
+
+rpc-bind-ip={{ monerod_rpc_bind_ip }}
+rpc-bind-port={{ monerod_rpc_bind_port }}
+
+restricted-rpc={{ monerod_restricted_rpc }}
+
+{% if monerod_exclusive_nodes is defined and monerod_exclusive_nodes is sequence %}
+{% for node in monerod_exclusive_nodes %}
+add-exclusive-node={{ node }}
+{% endfor %}
+{% endif %}
+
+confirm-external-bind={{ monerod_confirm_external_bind }}
+hide-my-port={{ monerod_hide_my_port }}

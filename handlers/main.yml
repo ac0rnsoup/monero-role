@@ -1,2 +1,10 @@
 ---
 # handlers file for monero-role
+- name: reload systemd
+  systemd:
+    daemon_reload: yes
+
+- name: restart monerod
+  systemd:
+    name: monerod
+    state: restarted

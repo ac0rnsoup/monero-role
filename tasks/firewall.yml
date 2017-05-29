@@ -29,7 +29,7 @@
     rule: allow
     port: "{{ monerod_p2p_bind_port }}"
     protocol: tcp
-  when: "{{ monerod_p2p_open_port }}"
+  when: monerod_p2p_open_port
   notify: reload ufw
   tags:
     - monero
@@ -40,7 +40,7 @@
     rule: deny
     port: "{{ monerod_p2p_bind_port }}"
     protocol: tcp
-  when: not "{{ monerod_p2p_open_port }}"
+  when: not monerod_p2p_open_port
   notify: reload ufw
   tags:
     - monero
@@ -51,7 +51,7 @@
     rule: allow
     port: "{{ monerod_rpc_bind_port }}"
     protocol: tcp
-  when: "{{ monerod_rpc_open_port }}"
+  when: monerod_rpc_open_port
   notify: reload ufw
   tags:
     - monero
@@ -62,7 +62,7 @@
     rule: deny
     port: "{{ monerod_rpc_bind_port }}"
     protocol: tcp
-  when: not "{{ monerod_rpc_open_port }}"
+  when: not monerod_rpc_open_port
   notify: reload ufw
   tags:
     - monero

@@ -95,11 +95,43 @@
     - monero
     - build
 
+- name: install monerod service
+  template:
+    src:  monerod.service.j2
+    dest: /lib/systemd/system/monerod.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload systemd
+    - restart monerod
+  tags:
+    - monero
+    - services
+    - configuration
+
 - name: install monero binaries
   shell: "/bin/cp -p {{ monero_install_dir }}/src/{{ monero_version }}/build/release/bin/{{ item }} {{ monero_install_dir }}/bin/"
   args:
     creates: "{{ monero_install_dir }}/bin/{{ item }}"
   with_items: "{{ monero_binaries }}"
+  notify:
+    - restart monerod
+  tags:
+    - monero
+    - build
+
+- name: install monerod configuration
+  template:
+    src: monerod.conf.j2
+    dest: "{{ monero_install_prefix }}/etc/monerod.conf"
+    owner: root
+    group: root
+    mode: 0644
+    notify: restart monerod
+  tags:
+    - monero
+    - configuration
 
 - name: configure logrotate for httpd
   template:

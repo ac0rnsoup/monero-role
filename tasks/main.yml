@@ -124,7 +124,7 @@
 - name: install monerod configuration
   template:
     src: monerod.conf.j2
-    dest: "{{ monero_install_prefix }}/etc/monerod.conf"
+    dest: "{{ monero_install_dir }}/etc/monerod.conf"
     owner: root
     group: root
     mode: 0644

@@ -13,3 +13,8 @@
   systemd:
     name: monerod
     state: restarted
+
+- name: reload ufw
+  ufw:
+    state: reloaded
+ 

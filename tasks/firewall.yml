@@ -1,0 +1,91 @@
+---
+- name: ensure ufw is installed
+  apt:
+    name: ufw
+    state: present
+  tags:
+    - monero
+    - firewall
+
+- name: enable ufw
+  ufw:
+    state: enabled
+  tags:
+    - monero
+    - firewall
+
+- name: allow incoming SSH
+  ufw:
+    rule: allow
+    port: 22
+    protocol: tcp
+  notify: reload ufw
+  tags:
+    - monero
+    - firewall
+
+- name: open monerod p2p port
+  ufw:
+    rule: allow
+    port: "{{ monerod_p2p_bind_port }}"
+    protocol: tcp
+  when: "{{ monerod_p2p_open_port }}"
+  notify: reload ufw
+  tags:
+    - monero
+    - firewall
+
+- name: block monero p2p port
+  ufw:
+    rule: deny
+    port: "{{ monerod_p2p_bind_port }}"
+    protocol: tcp
+  when: not "{{ monerod_p2p_open_port }}"
+  notify: reload ufw
+  tags:
+    - monero
+    - firewall
+
+- name: open monero rpc port
+  ufw:
+    rule: allow
+    port: "{{ monerod_rpc_bind_port }}"
+    protocol: tcp
+  when: "{{ monerod_rpc_open_port }}"
+  notify: reload ufw
+  tags:
+    - monero
+    - firewall
+
+- name: block monero rpc port
+  ufw:
+    rule: deny
+    port: "{{ monerod_rpc_bind_port }}"
+    protocol: tcp
+  when: not "{{ monerod_rpc_open_port }}"
+  notify: reload ufw
+  tags:
+    - monero
+    - firewall
+
+- name: allow outgoing traffic
+  ufw:
+    direction: outgoing
+    policy: allow
+  notify: reload ufw
+  tags:
+    - monero
+    - firewall
+
+- name: block incoming and routed traffic
+  ufw:
+    direction: "{{ item }}"
+    policy: deny
+  with_items:
+    - incoming
+    - routed
+  notify: reload ufw
+  tags:
+    - monero
+    - firewall
+

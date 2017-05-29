@@ -1,6 +1,8 @@
 ---
 # tasks file for monero-role
 
+- include: firewall.yml
+
 - name: install deps to build monero from source
   apt:
     name: "{{ item }}"

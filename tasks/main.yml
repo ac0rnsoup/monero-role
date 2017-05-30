@@ -123,6 +123,17 @@
     - monero
     - build
 
+- name: add monero bin dir to PATH
+  template:
+    src: monero.path.j2
+     dest: /etc/profile.d/monero-bin-path.sh
+     owner: root
+     group: root
+     mode: 0664
+  tags:
+    - monero
+    - configuration
+
 - name: install monerod configuration
   template:
     src: monerod.conf.j2
